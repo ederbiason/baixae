@@ -1,0 +1,40 @@
+/* You can add global styles to this file, and also import other style files */
+@import "tailwindcss";
+
+@theme {
+    --color-background: oklch(.91 .048 83.6);
+    --color-foreground: oklch(.41 .077 78.9);
+    --color-card: oklch(.92 .042 83.6);
+    --color-card-foreground: oklch(.41 .077 74.3);
+    --color-popover: oklch(.92 .042 83.6);
+    --color-popover-foreground: oklch(.41 .077 74.3);
+    --color-primary: oklch(.71 .097 111.7);
+    --color-primary-foreground: oklch(.98 .005 0);
+    --color-primary-border: oklch(.59 .096 111.8);
+    --color-secondary: oklch(.88 .055 83.6);
+    --color-secondary-foreground: oklch(.51 .077 78.9);
+    --color-muted: oklch(.86 .064 83.7);
+    --color-muted-foreground: oklch(.51 .077 74.3);
+    --color-accent: oklch(.86 .055 83.6);
+    --color-accent-foreground: oklch(.26 .016 0);
+    --color-destructive: oklch(.63 .24 29.2);
+    --color-destructive-foreground: oklch(.97 .018 0);
+    --color-destructive-border: oklch(.43 .24 29.2);
+    --color-border: oklch(.74 .063 80.8);
+    --color-input: oklch(.74 .063 80.8);
+    --color-ring: oklch(.51 .077 74.3);
+    --color-radius: .625rem;
+    --color-chart-1: oklch(.66 .19 41.6);
+    --color-chart-2: oklch(.68 .16 184.9);
+    --color-chart-3: oklch(.48 .09 210.9);
+    --color-chart-4: oklch(.85 .19 85.4);
+    --color-chart-5: oklch(.74 .19 66.3);
+    --color-sidebar-foreground: oklch(.41 .077 78.9);
+    --color-sidebar-background: oklch(.87 .059 83.7);
+    --color-sidebar-primary: oklch(.26 .016 0);
+    --color-sidebar-primary-foreground: oklch(.98 .005 0);
+    --color-sidebar-accent: oklch(.83 .058 83.6);
+    --color-sidebar-accent-foreground: oklch(.26 .016 0);
+    --color-sidebar-border: oklch(.91 .005 0);
+    --color-sidebar-ring: oklch(.71 .005 0);
+};
