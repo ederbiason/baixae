@@ -37,4 +37,47 @@
     --color-sidebar-accent-foreground: oklch(.26 .016 0);
     --color-sidebar-border: oklch(.91 .005 0);
     --color-sidebar-ring: oklch(.71 .005 0);
-};
+}
+
+;
+
+@layer base {
+    body {
+        background-color: var(--color-background);
+        margin: 0;
+        padding: 0;
+        display: flex;
+        width: 100vw;
+        height: 100dvh;
+    }
+}
+
+@layer base {
+    .texture {
+        opacity: .12;
+        mix-blend-mode: multiply;
+        z-index: 100;
+        isolation: isolate;
+        pointer-events: none;
+        background-image: url(https://matsu-theme.vercel.app/texture.jpg);
+        background-repeat: repeat;
+        background-size: 100% 100%;
+        width: 100vw;
+        height: 100dvh;
+        position: fixed;
+        inset: 0;
+    }
+}
+
+@layer utilities {
+    .ring,
+    .shadow-sm,
+    .shadow-xl,
+    .shadow-xs {
+        box-shadow: 0 0 #0000, 0 0 #0000, 0 0 #0000, 0 0 #0000, 0 3px 0 0 oklch(.74 .063 80.8);
+    }
+
+    .shadow-primary {
+        box-shadow: 0 0 #0000, 0 0 #0000, 0 0 #0000, 0 0 #0000, 0 3px 0 0 oklch(.59 .096 111.8);
+    }
+}
