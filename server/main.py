@@ -55,9 +55,15 @@ class DownloadRequest(BaseModel):
     text: str
     message: str
 
-@app.get("/api/download", response_model=VideoInfo)
-def get_video_download_info(format: str, url: str, copyright: int = 0, api: str = str(os.getenv("YOUTUBE_DOWNLOAD_KEY", ""))) -> VideoInfo:
-    api_url = os.getenv("API_DOWNLOAD_URL")
+class VideoDownloadInfo(BaseModel):
+    success: int
+    progress: int
+    download_url: str
+    text: str
+
+@app.get("/api/video-process", response_model=VideoInfo)
+def get_video_process_info(format: str, url: str, copyright: int = 0, api: str = str(os.getenv("YOUTUBE_DOWNLOAD_KEY", ""))) -> VideoInfo:
+    api_url = os.getenv("API_DOWNLOAD_INFO")
 
     response = httpx.get(
         api_url,
@@ -69,7 +75,7 @@ def get_video_download_info(format: str, url: str, copyright: int = 0, api: str 
         }
     )
 
-    data = response.json()
+    data: VideoInfo = response.json()
 
     return data
 
@@ -85,6 +91,21 @@ def get_youtube_video_info(url: str) -> YouTubeVideoInfo:
         }
     )
 
-    data = response.json()
+    data: YouTubeVideoInfo = response.json()
 
+    return data
+
+@app.get("/api/download", response_model=VideoDownloadInfo)
+def get_video_download_url(id: str) -> VideoDownloadInfo:
+    api_url = os.getenv("API_DOWNLOAD_URL")
+
+    response = httpx.get(
+        api_url,
+        params = {
+            "id": id
+        }
+    )
+
+    data: VideoDownloadInfo = response.json()
+    
     return data
