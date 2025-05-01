@@ -17,6 +17,21 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+class YouTubeVideoInfo(BaseModel): 
+    title: str
+    author_name: str
+    author_url: str
+    type: str
+    height: int
+    width: int
+    version: str
+    provider_name: str
+    provider_url: str
+    thumbnail_height: int
+    thumbnail_width: int
+    thumbnail_url: str
+    html: str
+
 class Info(BaseModel):
     image: str
     title: str
@@ -55,6 +70,21 @@ def get_video_download_info(format: str, url: str, copyright: int = 0, api: str 
     )
 
     data = response.json()
-    print(data)
+
+    return data
+
+@app.get("/api/video-info", response_model=YouTubeVideoInfo)
+def get_youtube_video_info(url: str) -> YouTubeVideoInfo:
+    api_url = "https://www.youtube.com/oembed"
+    
+    response = httpx.get(
+        api_url,
+        params = {
+            "url": url,
+            "format": "json"
+        }
+    )
+
+    data = response.json()
 
     return data
