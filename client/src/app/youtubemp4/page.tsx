@@ -1,3 +1,5 @@
+"use client"
+
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import {
@@ -11,6 +13,8 @@ import {
 import Image from "next/image"
 import logo from "/public/assets/logo-nome.png"
 import { Download } from "lucide-react"
+import { useState } from "react"
+import { VideoInfoProps } from "@/@types/interface"
 
 type VideoQualities = {
   label: string
@@ -25,6 +29,19 @@ const videoQualities: VideoQualities[] = [
 ]
 
 export default function YoutubeMP4Page() {
+  const [videoInfo, setVideoInfo] = useState<VideoInfoProps | null>(null)
+  const [videoUrl, setVideoUrl] = useState<string>("")
+
+  const handleConvert = async () => {
+    try {
+      const res: VideoInfoProps = await fetch(`/api/video-info?url=${videoUrl}`).then(data => data.json())
+
+      setVideoInfo(res)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
   return (
     <div className="flex flex-col gap-20 w-full">
       <div className="text-center text-xl">
@@ -36,46 +53,55 @@ export default function YoutubeMP4Page() {
           <Input
             placeholder="Cole o link do vídeo aqui..."
             className="h-14 px-5"
+            onChange={(e) => setVideoUrl(e.target.value)}
           />
-          <Button className="h-14 text-base">
+          <Button 
+            className="h-14 text-base cursor-pointer"
+            onClick={handleConvert}
+            disabled={videoUrl === ""}
+          >
             Converter
           </Button>
         </div>
 
-        <div className="flex gap-10 items-center">
-          <Image
-            src={logo}
-            width={250}
-            height={250}
-            alt="Thumbnail of the video pasted in the input"
-          />
+        {
+          videoInfo !== null && (
+            <div className="flex gap-10 items-center">
+              <Image
+                src={videoInfo.thumbnail_url}
+                width={videoInfo.thumbnail_width}
+                height={videoInfo.thumbnail_height}
+                alt="Thumbnail of the video pasted in the input"
+              />
 
-          <div className="border h-fit p-2 rounded-lg shadow-xs">
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Qualidade</TableHead>
-                  <TableHead>Formato</TableHead>
-                  <TableHead className="text-center">Ação</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {videoQualities.map((quality) => (
-                  <TableRow key={quality.value}>
-                    <TableCell>{quality.label}</TableCell>
-                    <TableCell>{quality.format}</TableCell>
-                    <TableCell>
-                      <Button className="group h-10 text-base w-fit self-end">
-                        <Download className="group-hover:animate-bounce" />
-                        Download
-                      </Button>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </div>
-        </div>
+              <div className="border h-fit p-2 rounded-lg shadow-xs">
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Qualidade</TableHead>
+                      <TableHead>Formato</TableHead>
+                      <TableHead className="text-center">Ação</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {videoQualities.map((quality) => (
+                      <TableRow key={quality.value}>
+                        <TableCell>{quality.label}</TableCell>
+                        <TableCell>{quality.format}</TableCell>
+                        <TableCell>
+                          <Button className="group h-10 text-base w-fit self-end">
+                            <Download className="group-hover:animate-bounce" />
+                            Download
+                          </Button>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </div>
+            </div>
+          )
+        }
       </div>
     </div>
   )
