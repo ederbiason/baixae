@@ -15,13 +15,13 @@ import { Download } from "lucide-react"
 type VideoQualities = {
   label: string
   format: string
-  value: number
+  value: string
 }
 
 const videoQualities: VideoQualities[] = [
-  { label: 'Full HD (1080p)', format: "MP4", value: 1080 },
-  { label: 'HD (720p)', format: "MP4", value: 720 },
-  { label: 'SD (360p)', format: "MP4", value: 360 },
+  { label: 'Full HD (1080p)', format: "MP4", value: "1080" },
+  { label: 'HD (720p)', format: "MP4", value: "720" },
+  { label: 'SD (360p)', format: "MP4", value: "360" },
 ]
 
 export default function YoutubeMP4Page() {
