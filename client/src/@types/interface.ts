@@ -13,3 +13,19 @@ export interface VideoInfoProps {
     thumbnail_url: string
     html: string
 }
+
+export interface VideoProcessProps {
+    success: boolean
+    id: string
+    content: string
+    title: string
+    info: {
+        image: string
+        title: string
+    }
+    repeat_download: boolean | null
+    message: string | null
+    cachehash: string
+    additional_info: null
+    progress_url: string
+} 

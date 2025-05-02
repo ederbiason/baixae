@@ -29,13 +29,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${nunito.variable} ${ptSans.variable} antialiased relative`}
+        className={`${nunito.variable} ${ptSans.variable} antialiased relative flex flex-col min-h-screen`}
       >
         <div className="texture" />
 
         <Header />
 
-        <main className="my-16 md:my-28 mx-4 md:mx-10 lg:mx-20 xl:mx-44">
+        <main className="grow mt-16 md:mt-28 mx-4 md:mx-10 lg:mx-20 xl:mx-44">
           {children}
         </main>
 

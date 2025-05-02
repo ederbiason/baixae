@@ -27,7 +27,7 @@ const audioQualities: AudioQualities[] = [
 export default function YoutubeMP3Page() {
   return (
     <div className="flex flex-col gap-20 w-full">
-      <div className="text-center text-xl">
+      <div className="text-center text-3xl font-bold">
         Conversor de YouTube para MP3
       </div>
 
