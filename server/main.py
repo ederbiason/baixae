@@ -48,22 +48,16 @@ class VideoInfo(BaseModel):
     additional_info: Optional[None] = None
     progress_url: str
 
-class DownloadRequest(BaseModel):
-    success: int
-    progress: int
-    download_url: str
-    text: str
-    message: str
-
 class VideoDownloadInfo(BaseModel):
     success: int
     progress: int
-    download_url: str
+    download_url: Optional[str] = None
     text: str
 
 @app.get("/api/video-process", response_model=VideoInfo)
-def get_video_process_info(format: str, url: str, copyright: int = 0, api: str = str(os.getenv("YOUTUBE_DOWNLOAD_KEY", ""))) -> VideoInfo:
+def get_video_process_info(format: str, url: str, copyright: int = 0) -> VideoInfo:
     api_url = os.getenv("API_DOWNLOAD_INFO")
+    api_key = os.getenv("YOUTUBE_DOWNLOAD_KEY")
 
     response = httpx.get(
         api_url,
@@ -71,7 +65,7 @@ def get_video_process_info(format: str, url: str, copyright: int = 0, api: str =
             "copyright": copyright,
             "format": format,
             "url": url,
-            "api": api
+            "api": api_key
         }
     )
 
