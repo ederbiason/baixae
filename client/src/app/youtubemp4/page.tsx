@@ -11,7 +11,6 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import Image from "next/image"
-import logo from "/public/assets/logo-nome.png"
 import { Download } from "lucide-react"
 import { useState } from "react"
 import { VideoInfoProps } from "@/@types/interface"

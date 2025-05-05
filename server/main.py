@@ -52,7 +52,7 @@ class VideoDownloadInfo(BaseModel):
     success: int
     progress: int
     download_url: Optional[str] = None
-    text: str
+    text: Optional[str] = None
 
 @app.get("/api/video-process", response_model=VideoInfo)
 def get_video_process_info(format: str, url: str, copyright: int = 0) -> VideoInfo:
