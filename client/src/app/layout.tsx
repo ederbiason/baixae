@@ -35,7 +35,7 @@ export default function RootLayout({
 
         <Header />
 
-        <main className="grow mt-16 md:mt-28 mx-4 md:mx-10 lg:mx-20 xl:mx-44">
+        <main className="grow mt-16 md:mt-24 mx-4 md:mx-10 lg:mx-20 xl:mx-44">
           {children}
         </main>
 
